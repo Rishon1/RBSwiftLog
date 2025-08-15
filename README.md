@@ -1,26 +1,15 @@
-pod-template
-============
+Podfile
 
-An opinionated template for creating a Pod with the following features:
+```bash
+pod 'RBSwiftLog'
+```
 
-- Git as the source control management system
-- Clean folder structure
-- Project generation
-- MIT license
-- Testing as a standard
-- Turnkey access to Travis CI
-- Also supports Carthage
 
-## Getting started
+## 遇到问题一： Sandbox: rsync(2373) deny(1) file-write-create /Xcode/DerivedData/RBTestDemo-eyaqrbzicokcvycszinkeewrkanh/Build/Products/Debug-iphoneos/RBTestDemo.app/Frameworks/SnapKit.framework/SnapKit_Privacy.bundle
 
-There are two reasons for wanting to work on this template, making your own or improving the one for everyone's. In both cases you will want to work with the ruby classes inside the `setup` folder, and the example base template that it works on from inside `template/ios/`. 
-
-## Best practices
-
-The command `pod lib create` aims to be ran along with this guide: https://guides.cocoapods.org/making/using-pod-lib-create.html so any changes of flow should be updated there also.
-
-It is open to communal input, but adding new features, or new ideas are probably better off being discussed in an issue first. In general we try to think if an average Xcode user is going to use this feature or not, if it's unlikely is it a _very strongly_ encouraged best practice ( ala testing / CI. ) If it's something useful for saving a few minutes every deploy, or isn't easily documented in the guide it is likely to be denied in order to keep this project as simple as possible.
-
-## Requirements:
-
-- CocoaPods 1.0.0+
+### 这个错误是由于Xcode的沙盒机制限制了rsync命令对文件系统的写入权限导致的，常见于使用CocoaPods集成第三方库（如SnapKit）时
+‌禁用用户脚本沙盒‌（推荐方案）：
+在Xcode中打开项目
+进入Targets → Build Settings
+搜索"ENABLE_USER_SCRIPT_SANDBOXING"
+将其值设置为"NO"
