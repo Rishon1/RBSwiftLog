@@ -33,7 +33,7 @@ public class RBLogger {
     fileprivate var showTagInfo = true
     
     /// verbose log string.
-    public var verboseSingal: String {
+    public var markVerbose: String {
         set {
             LoggerSingal.verboseSingal = newValue
         }
@@ -44,7 +44,7 @@ public class RBLogger {
     }
     
     /// debug log string.
-    public var debugSingal: String{
+    public var markDebug: String{
         set {
             LoggerSingal.debugSingal = newValue
         }
@@ -55,7 +55,7 @@ public class RBLogger {
     }
     
     /// info log string.
-    public var infoSignal: String {
+    public var markInfo: String {
         set {
             LoggerSingal.infoSignal = newValue
         }
@@ -66,7 +66,7 @@ public class RBLogger {
     }
     
     /// warning log string.
-    public var warningSignal: String {
+    public var markWarning: String {
         set {
             LoggerSingal.warningSignal = newValue
         }
@@ -77,7 +77,7 @@ public class RBLogger {
     }
     
     /// error log string.
-    public var errorSignal: String {
+    public var markError: String {
         set {
             LoggerSingal.errorSignal = newValue
         }
@@ -88,7 +88,7 @@ public class RBLogger {
     }
     
     /// fatal log string.
-    public var fatalSignal: String {
+    public var markFatal: String {
         set {
             LoggerSingal.fatalSignal = newValue
         }
@@ -131,7 +131,7 @@ extension RBLogger {
     - parameter line:     Line number
     - returns: The string logged out.
     */
-    @discardableResult public func verbose<T>(tag: String, _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
+    @discardableResult public func verbose<T>(tag: String = "", _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
         return verbose("\(value)", tag: tag, function: function, file: file,  line: line)
     }
     
@@ -143,7 +143,7 @@ extension RBLogger {
     - parameter line:     Line number
     - returns: The string logged out.
     */
-    @discardableResult public func debug<T>(tag: String, _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
+    @discardableResult public func debug<T>(tag: String = "", _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
         return debug("\(value)", tag: tag, function: function, file: file,  line: line)
     }
     
@@ -157,7 +157,7 @@ extension RBLogger {
     
     - returns: The string logged out.
     */
-    @discardableResult public func info<T>(tag: String, _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
+    @discardableResult public func info<T>(tag: String = "", _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
         return info("\(value)", tag: tag, function: function, file: file,  line: line)
     }
     
@@ -171,7 +171,7 @@ extension RBLogger {
     
     - returns: The string logged out.
     */
-    @discardableResult public func warning<T>(tag: String, _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
+    @discardableResult public func warning<T>(tag: String = "", _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
         return warning("\(value)", tag:tag, function: function, file: file,  line: line)
     }
     
@@ -185,7 +185,7 @@ extension RBLogger {
     
     - returns: The string logged out.
     */
-    @discardableResult public func error<T>(tag: String, _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
+    @discardableResult public func error<T>(tag: String = "", _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
         return error("\(value)", tag:tag, function: function, file: file,  line: line)
     }
     
@@ -199,7 +199,7 @@ extension RBLogger {
     
     - returns: The string logged out.
     */
-    @discardableResult public func fatal<T>(tag: String, _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
+    @discardableResult public func fatal<T>(tag: String = "", _ value: T, function: String = #function, file: String = #file, line: Int = #line) -> String? {
         return fatal("\(value)", tag: tag, function: function, file: file,  line: line)
     }
 
@@ -215,7 +215,7 @@ extension RBLogger {
     
     - returns: The string logged out.
     */
-    @discardableResult public func logWithLevel(tag: String, _ level: LogLevel, _ format: String = "", function: String = #function, file: String = #file, line: Int = #line, args: CVarArg...) -> String?
+    @discardableResult public func logWithLevel(tag: String = "", _ level: LogLevel, _ format: String = "", function: String = #function, file: String = #file, line: Int = #line, args: CVarArg...) -> String?
     {
         if level >= logLevel {
             return log(level, tag: tag, function: function, file: file, line: line, format: format, args: args)
@@ -253,15 +253,15 @@ extension RBLogger
         //4. file name
         var fileLine = ""
         if showFileName {
-            fileLine += "[" + (file as NSString).lastPathComponent
-            fileLine += "] "
+            let fileNameWithoutExtension = URL(fileURLWithPath: file).deletingPathExtension().lastPathComponent
+            fileLine += "[" + fileNameWithoutExtension + "] "
         }
         
         //5. functionname
         let functionString = showFunctionName ? function : ""
         
         //6. line info
-        let lineString = showLineNumber ? ":Line:\(line) " : ""
+        let lineString = showLineNumber ? "Line:\(line) " : ""
         
         //7. message
         let message: String
@@ -273,7 +273,7 @@ extension RBLogger
         
         let infoString = "\(dateTime)\(tagString)\(levelString)\(fileLine)\(functionString)\(lineString)".trimmingCharacters(in: CharacterSet(charactersIn: " "))
         
-        let logString = infoString + (infoString.isEmpty ? "" : " Message:") + "\(message)"
+        let logString = infoString + (infoString.isEmpty ? "" : " MSG:") + "\(message)"
         self.LogFunction(logString)
         
         return logString

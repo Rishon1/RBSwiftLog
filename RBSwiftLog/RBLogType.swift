@@ -132,12 +132,12 @@ struct LoggerSingal {
     
     
     /// default  log level Signal
-    static fileprivate let defaultVerboseSignalTuple = "✳️✳️"
-    static fileprivate let defaultDebugSignalTuple = "❇️❇️"
-    static fileprivate let defaultInfoSignalTuple = "🟩🟩"
-    static fileprivate let defaultWarningSignalTuple = "✴️✴️"
-    static fileprivate let defaultErrorSignalTuple = "⛔️⛔️"
-    static fileprivate let defaultFatalSignalTuple = "🟥🟥"
+    static fileprivate let defaultVerboseSignalTuple = "✳️"
+    static fileprivate let defaultDebugSignalTuple = "❇️"
+    static fileprivate let defaultInfoSignalTuple = "🟩"
+    static fileprivate let defaultWarningSignalTuple = "✴️"
+    static fileprivate let defaultErrorSignalTuple = "⛔️"
+    static fileprivate let defaultFatalSignalTuple = "🟥"
 }
 
 public func translateToLogString(level: LogLevel) -> String

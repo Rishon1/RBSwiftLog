@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'RBSwiftLog'
-  s.version      = '0.1.1'
+  s.version      = '0.1.2'
   s.summary      = 'Swift elegant printing Log'
   s.description  = 'Swift prints error, warning, info and other logs'
   s.homepage     = 'https://github.com/Rishon1/RBSwiftLog'
