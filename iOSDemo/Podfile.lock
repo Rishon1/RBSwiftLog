@@ -1,0 +1,16 @@
+PODS:
+  - RBSwiftLog (0.1.1)
+
+DEPENDENCIES:
+  - RBSwiftLog (from `./../../RBSwiftLog`)
+
+EXTERNAL SOURCES:
+  RBSwiftLog:
+    :path: "./../../RBSwiftLog"
+
+SPEC CHECKSUMS:
+  RBSwiftLog: 26b9c70871acc7a02b55765121ad11291e9eb798
+
+PODFILE CHECKSUM: ed2984ac205520077de850c3ed020253a0b52edd
+
+COCOAPODS: 1.16.2
