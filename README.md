@@ -4,6 +4,9 @@ Podfile
 pod 'RBSwiftLog'
 ```
 
+## Release Note: 0.1.3
+1. Change Log Icon
+
 ## Release Note: 0.1.2
 1. TAG info not must
 2. Demo Show how to use RBSwiftLog
